@@ -11,9 +11,16 @@ export async function middleware(req: NextRequest) {
     req.nextUrl.pathname.startsWith(path)
   );
 
+  // kullanıcı zaten giriş yapmışsa login sayfasına gitmeye calisinca ana sayfaya yönlendir
+  if (pathname === "/login" && token) {
+    const url = req.nextUrl.clone();
+    url.pathname = "/";
+    return NextResponse.redirect(url);
+  }
+
   if (isProtected && !token) {
     const url = req.nextUrl.clone();
-    url.pathname = "/api/auth/signin";
+    url.pathname = "/login";
     return NextResponse.redirect(url);
   }
 
@@ -29,5 +36,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/profile/:path*", "/admin/:path*"],
+  matcher: ["/dashboard/:path*", "/profile/:path*", "/admin/:path*", "/login"],
 };
