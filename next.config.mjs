@@ -20,7 +20,11 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "github.com", // (bazı eski GitHub avatar URL'leri için)
+        hostname: "github.com", // Eski GitHub avatar URL'leri
+      },
+      {
+        protocol: "https",
+        hostname: "fakestoreapi.com", // ✅ Fake Store ürün görselleri
       },
     ],
   },
