@@ -36,6 +36,7 @@ export default function Navbar() {
             </Link>
           );
         })}
+        <Link href="/cart">Sepet</Link>
 
         {/* Dinamik buton */}
         {session ? (
