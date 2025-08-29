@@ -10,17 +10,18 @@ export const metadata: Metadata = {
     "Next.js + NextAuth temelli bir kimlik doğrulama ve yetkilendirme sistemi",
 };
 
+// layout.tsx
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body>
+      <body className="min-h-screen grid grid-rows-[auto,1fr]">
         <AuthProvider>
-          <Navbar />
-          <main>{children}</main>
+          <Navbar /> {/* yüksekliği kadar auto satır */}
+          <main>{children}</main> {/* kalan alanı otomatik doldurur */}
         </AuthProvider>
       </body>
     </html>

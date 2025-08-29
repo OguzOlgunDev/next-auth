@@ -1,8 +1,6 @@
-import AuthButton from "@/components/auth/AuthButton";
-
 export default function Home() {
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen">
+    <main className="flex h-full flex-col items-center justify-center ">
       <h1 className="text-2xl">Hoşgeldin!</h1>
     </main>
   );

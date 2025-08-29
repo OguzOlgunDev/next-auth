@@ -14,6 +14,14 @@ const nextConfig = {
         protocol: "https",
         hostname: "*.auth0.com", // Auth0 hosted avatars
       },
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com", // GitHub profile photos
+      },
+      {
+        protocol: "https",
+        hostname: "github.com", // (bazı eski GitHub avatar URL'leri için)
+      },
     ],
   },
 };
