@@ -1,16 +1,13 @@
-"use client";
-
 import {
   Card,
   CardHeader,
   CardTitle,
   CardDescription,
-  CardContent,
   CardFooter,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
+import AddToCartButton from "./AddToCartButton";
 
 type Product = {
   id: number;
@@ -19,7 +16,13 @@ type Product = {
   image: string;
 };
 
-export function ProductCard({ product }: { product: Product }) {
+export function ProductCard({
+  product,
+  priority,
+}: {
+  product: Product;
+  priority?: boolean;
+}) {
   return (
     <Card className="hover:shadow-md transition">
       <Link href={`/products/${product.id}`}>
@@ -30,6 +33,11 @@ export function ProductCard({ product }: { product: Product }) {
               alt={product.title}
               fill
               className="object-contain"
+              // Lighthouse için optimize
+              priority={priority} // sadece ilk birkaç ürüne true gönder
+              sizes="(max-width: 640px) 100vw,
+                     (max-width: 1024px) 50vw,
+                     25vw"
             />
           </div>
           <CardTitle className="text-sm line-clamp-2">
@@ -39,7 +47,8 @@ export function ProductCard({ product }: { product: Product }) {
         </CardHeader>
       </Link>
       <CardFooter>
-        <Button className="w-full">Add to Cart</Button>
+        {/* Interaktif kısmı ayrı client component */}
+        <AddToCartButton productId={product.id} />
       </CardFooter>
     </Card>
   );
