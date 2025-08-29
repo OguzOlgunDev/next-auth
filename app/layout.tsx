@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Providers from "./providers";
+import RootProviders from "@/providers/RootProvider";
 import Navbar from "@/components/navbar/Navbar";
-import AuthProvider from "@/components/auth/AuthProvider";
 
 export const metadata: Metadata = {
   title: "Next-Auth-1",
@@ -19,10 +18,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen grid grid-rows-[auto,1fr]">
-        <AuthProvider>
+        <RootProviders>
           <Navbar /> {/* yüksekliği kadar auto satır */}
           <main>{children}</main> {/* kalan alanı otomatik doldurur */}
-        </AuthProvider>
+        </RootProviders>
       </body>
     </html>
   );

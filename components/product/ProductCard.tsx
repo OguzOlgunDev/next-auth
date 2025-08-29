@@ -47,8 +47,7 @@ export function ProductCard({
         </CardHeader>
       </Link>
       <CardFooter>
-        {/* Interaktif kısmı ayrı client component */}
-        <AddToCartButton productId={product.id} />
+        <AddToCartButton product={product} />
       </CardFooter>
     </Card>
   );
