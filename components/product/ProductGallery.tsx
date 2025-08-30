@@ -1,15 +1,11 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Heart } from "lucide-react";
+import WishlistButton from "@/components/product/WhishlistButton";
+import type { Product } from "@/types/product";
 
-export default function ProductGallery({
-  image,
-  title,
-}: {
-  image: string;
-  title: string;
-}) {
+export default function ProductGallery({ product }: { product: Product }) {
+  const { id, image, title } = product;
+
   return (
     <div className="space-y-4">
       <div className="aspect-square relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
@@ -18,14 +14,9 @@ export default function ProductGallery({
           alt={title}
           className="w-full h-full object-contain p-8 hover:scale-105 transition-transform duration-500"
         />
-        <Button
-          variant="ghost"
-          size="icon"
-          className="absolute top-4 right-4 bg-white/80 backdrop-blur-sm hover:bg-white"
-          aria-label="Add to favorites"
-        >
-          <Heart className="w-5 h-5" />
-        </Button>
+
+        {/* ✅ WishlistButton id + title alıyor */}
+        <WishlistButton productId={id} productTitle={title} />
       </div>
 
       {/* Thumbnail Gallery */}

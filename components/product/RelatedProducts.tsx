@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Product } from "@/types/product";
 
 export default async function RelatedProducts({
@@ -38,9 +39,10 @@ export default async function RelatedProducts({
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((p) => (
-          <div
+          <Link
             key={p.id}
-            className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer group"
+            href={`/products/${p.id}`}
+            className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer group block"
           >
             <div className="aspect-square bg-gray-50 relative overflow-hidden">
               <img
@@ -55,7 +57,7 @@ export default async function RelatedProducts({
               </h3>
               <p className="text-lg font-bold text-gray-900">${p.price}</p>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

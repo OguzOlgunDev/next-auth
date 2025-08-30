@@ -99,7 +99,7 @@ export default async function ProductPage({
       <div className="max-w-7xl mx-auto px-4 pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Product Image Section */}
-          <ProductGallery image={product.image} title={product.title} />
+          <ProductGallery product={product} />
 
           {/* Product Information Section */}
           <div className="space-y-6">
