@@ -14,7 +14,7 @@ export default function Navbar() {
   const links = session ? navLinksPrivite : navLinksPublic;
 
   return (
-    <nav className="flex items-center justify-between px-6 py-4 bg-gray-900 text-white shadow">
+    <nav className="flex items-center justify-between px-6 py-4 bg-gray-900 text-white shadow relative">
       {/* Logo */}
       <div className="text-xl font-bold flex items-center gap-4">
         <Link href="/">MyApp</Link>
