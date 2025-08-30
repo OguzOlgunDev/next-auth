@@ -12,9 +12,6 @@ export default function ProductHeader({
 }) {
   return (
     <div>
-      <Badge variant="secondary" className="mb-3">
-        New Arrival
-      </Badge>
       <h1 className="text-4xl font-bold text-gray-900 mb-3 leading-tight">
         {title}
       </h1>

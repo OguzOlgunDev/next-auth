@@ -1,89 +1,108 @@
 "use client";
 
-import { useAppDispatch, useAppSelector } from "../../lib/hooks";
-import {
-  increment,
-  decrement,
-  removeItem,
-} from "../../features/cart/cartSlice";
-import { useMemo } from "react";
-import Image from "next/image";
+import Link from "next/link";
+import { useMemo, useCallback } from "react";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { increment, decrement, removeItem } from "@/features/cart/cartSlice";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import { ArrowLeft } from "lucide-react";
+import { toast } from "sonner";
+
+import CartEmpty from "@/components/cart/CartEmpty";
+import { CartItemCard } from "@/components/cart/CartItemCard";
+import ShippingNotice from "@/components/cart/ShippingNotice";
+import OrderSummary from "@/components/cart/OrderSummary";
+import RecommendedList from "@/components/cart/RecommendedList";
+import MobileCheckoutBar from "@/components/cart/MobileCheckoutBar";
+import { calcTotals } from "@/lib/cart/totals";
 
 export default function CartPage() {
   const items = useAppSelector((s) => s.cart.items);
   const dispatch = useAppDispatch();
 
-  // toplam fiyatı sadece items değiştiğinde hesapla
-  const total = useMemo(
-    () => items.reduce((sum, i) => sum + i.price * i.qty, 0),
+  const { subtotal, shipping, tax, finalTotal } = useMemo(
+    () => calcTotals(items),
     [items]
   );
 
-  if (items.length === 0) {
-    return (
-      <div className="p-6 text-center text-gray-600">🛒 Sepetiniz boş</div>
-    );
-  }
+  const handleRemoveItem = useCallback(
+    (id: number, title: string) => {
+      dispatch(removeItem(id));
+      toast.success("Item removed from cart", {
+        description: `${title} has been removed from your cart.`,
+      });
+    },
+    [dispatch]
+  );
+
+  const handleIncrement = useCallback(
+    (id: number) => {
+      dispatch(increment(id));
+    },
+    [dispatch]
+  );
+
+  const handleDecrement = useCallback(
+    (id: number) => {
+      dispatch(decrement(id));
+    },
+    [dispatch]
+  );
+
+  if (items.length === 0) return <CartEmpty />;
 
   return (
-    <div className="mx-auto max-w-3xl p-6">
-      <h1 className="text-2xl font-semibold mb-6">Sepet</h1>
-
-      <ul className="space-y-4">
-        {items.map((it) => (
-          <li
-            key={it.id}
-            className="flex items-center justify-between border rounded-lg p-4"
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        {/* Header */}
+        <div className="mb-8">
+          <Link
+            href="/products"
+            className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-4 transition-colors"
           >
-            {/* Ürün bilgisi */}
-            <div className="flex items-center gap-4">
-              {it.image && (
-                <div className="relative w-16 h-16 flex-shrink-0">
-                  <Image
-                    src={it.image}
-                    alt={it.title}
-                    fill
-                    className="object-contain rounded"
-                    sizes="64px" // bu kutu hep 64px olduğundan sabit verebiliriz
-                  />
-                </div>
-              )}
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Continue Shopping
+          </Link>
+          <div className="flex items-center justify-between">
+            <h1 className="text-3xl font-bold text-gray-900">Shopping Cart</h1>
+            <Badge variant="secondary" className="text-sm">
+              {items.length} {items.length === 1 ? "item" : "items"}
+            </Badge>
+          </div>
+        </div>
 
-              <div>
-                <div className="font-medium">{it.title}</div>
-                <div className="text-sm text-gray-500">${it.price}</div>
-              </div>
-            </div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Cart Items */}
+          <div className="lg:col-span-2 space-y-4">
+            {items.map((item) => (
+              <CartItemCard
+                key={item.id}
+                item={item}
+                onRemove={handleRemoveItem}
+                onInc={handleIncrement}
+                onDec={handleDecrement}
+              />
+            ))}
+            <ShippingNotice total={subtotal} />
+          </div>
 
-            {/* Kontroller */}
-            <div className="flex items-center gap-2">
-              <button
-                className="px-3 py-1 border rounded"
-                onClick={() => dispatch(decrement(it.id))}
-              >
-                -
-              </button>
-              <span className="w-8 text-center">{it.qty}</span>
-              <button
-                className="px-3 py-1 border rounded"
-                onClick={() => dispatch(increment(it.id))}
-              >
-                +
-              </button>
-              <button
-                className="ml-4 text-sm text-red-600"
-                onClick={() => dispatch(removeItem(it.id))}
-              >
-                Kaldır
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
+          {/* Order Summary */}
+          <div className="lg:col-span-1">
+            <Card className="sticky top-8">
+              <OrderSummary
+                itemCount={items.length}
+                subtotal={subtotal}
+                shipping={shipping}
+                tax={tax}
+                total={finalTotal}
+              />
+            </Card>
+            <RecommendedList />
+          </div>
+        </div>
 
-      {/* Toplam */}
-      <div className="mt-6 text-right text-lg">
-        Toplam: <b>${total.toFixed(2)}</b>
+        <MobileCheckoutBar total={finalTotal} count={items.length} />
       </div>
     </div>
   );
