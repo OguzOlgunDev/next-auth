@@ -1,0 +1,8 @@
+{
+  "button": "Add to Cart",
+  "toast": {
+    "added": "{title} ({qty} pcs) added to cart.",
+    "removed": "{title} removed from cart.",
+    "undo": "Undo"
+  }
+}

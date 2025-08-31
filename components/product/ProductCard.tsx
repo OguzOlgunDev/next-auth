@@ -1,10 +1,11 @@
 "use client";
 
+import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import RatingStars from "@/components/product/RatingStars";
 import AddToCartButton from "@/components/product/AddToCartButton";
-import WishlistButton from "@/components/product/WhishlistButton"; // ✅
+import WishlistButton from "@/components/product/WhishlistButton";
 
 type Product = {
   id: number;
@@ -19,8 +20,12 @@ type Product = {
 };
 
 export function ProductCard({ product }: { product: Product }) {
+  const t = useTranslations("components.productcard");
+
+  const locale = useLocale();
+
   const formatPrice = (price: number) =>
-    new Intl.NumberFormat("en-US", {
+    new Intl.NumberFormat(locale, {
       style: "currency",
       currency: "USD",
     }).format(price);
@@ -36,8 +41,6 @@ export function ProductCard({ product }: { product: Product }) {
               alt={product.title}
               className="w-full h-full object-contain p-4 group-hover:scale-[1.02] transition-transform duration-500"
             />
-
-            {/* ✅ WishlistButton */}
             <WishlistButton
               productId={product.id}
               productTitle={product.title}
@@ -74,11 +77,12 @@ export function ProductCard({ product }: { product: Product }) {
                   </span>
                 </div>
                 <p className="text-xs text-green-600 font-medium">
-                  Free shipping
+                  {t("freeShipping")}
                 </p>
               </div>
             </div>
 
+            {/* AddToCartButton da kendi içinde çeviri kullanabilir */}
             <AddToCartButton product={{ ...product, qty: 1 }} />
           </div>
         </CardContent>

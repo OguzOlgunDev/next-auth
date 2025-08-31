@@ -1,0 +1,8 @@
+{
+  "button": "Sepete Ekle",
+  "toast": {
+    "added": "{title} ({qty} adet) sepete eklendi.",
+    "removed": "{title} sepetten çıkarıldı.",
+    "undo": "Geri Al"
+  }
+}

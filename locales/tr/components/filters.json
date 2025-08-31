@@ -1,0 +1,37 @@
+{
+  "active": "Aktif Filtreler",
+  "clearAll": "Tümünü Temizle",
+  "badge": {
+    "category": "{label}",
+    "min": "Min: ${value}",
+    "max": "Maks: ${value}",
+    "sort": "{label}"
+  },
+  "priceRange": "Fiyat Aralığı",
+  "minLabel": "Minimum Fiyat",
+  "maxLabel": "Maksimum Fiyat",
+  "minPlaceholder": "$0",
+  "maxPlaceholder": "$1000",
+  "category": "Kategori",
+  "allCategories": "Tüm Kategoriler",
+  "sortBy": "Sıralama",
+  "sort": {
+    "default": "Varsayılan",
+    "priceAsc": "Fiyat: Artan",
+    "priceDesc": "Fiyat: Azalan",
+    "nameAsc": "İsim: A'dan Z'ye",
+    "nameDesc": "İsim: Z'den A'ya"
+  },
+  "apply": "Filtreleri Uygula",
+  "quickFilters": "Hızlı Filtreler",
+  "under50": "50$ Altı",
+  "fiftyToHundred": "$50 - $100",
+  "over100": "$100 Üstü",
+  "bestValue": "En Uygun",
+  "categories": {
+    "men": "Erkek Giyim",
+    "women": "Kadın Giyim",
+    "jewelery": "Mücevher",
+    "electronics": "Elektronik"
+  }
+}
