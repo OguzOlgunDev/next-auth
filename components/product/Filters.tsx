@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -15,8 +15,10 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { X, RotateCcw } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function Filters() {
+  const t = useTranslations("components.filters");
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -25,13 +27,22 @@ export default function Filters() {
   const [sort, setSort] = useState(searchParams.get("sort") || "");
   const [category, setCategory] = useState(searchParams.get("category") || "");
 
+  const categories = useMemo(
+    () => [
+      { value: "men's clothing", label: t("categories.men") },
+      { value: "women's clothing", label: t("categories.women") },
+      { value: "jewelery", label: t("categories.jewelery") },
+      { value: "electronics", label: t("categories.electronics") },
+    ],
+    [t]
+  );
+
   const applyFilters = () => {
     const params = new URLSearchParams();
     if (min) params.set("min", min);
     if (max) params.set("max", max);
-    if (sort) params.set("sort", sort);
-    if (category) params.set("category", category);
-
+    if (sort && sort !== "all") params.set("sort", sort);
+    if (category && category !== "all") params.set("category", category);
     router.push(`/products?${params.toString()}`);
   };
 
@@ -43,14 +54,23 @@ export default function Filters() {
     router.push("/products");
   };
 
-  const hasActiveFilters = min || max || sort || category;
+  const hasActiveFilters =
+    Boolean(min) ||
+    Boolean(max) ||
+    (Boolean(sort) && sort !== "all") ||
+    (Boolean(category) && category !== "all");
 
-  const categories = [
-    { value: "men's clothing", label: "Men's Clothing" },
-    { value: "women's clothing", label: "Women's Clothing" },
-    { value: "jewelery", label: "Jewelry" },
-    { value: "electronics", label: "Electronics" },
-  ];
+  // sort label'ı i18n üzerinden üret
+  const sortLabel =
+    sort === "price_asc"
+      ? t("sort.priceAsc")
+      : sort === "price_desc"
+      ? t("sort.priceDesc")
+      : sort === "name_asc"
+      ? t("sort.nameAsc")
+      : sort === "name_desc"
+      ? t("sort.nameDesc")
+      : t("sort.default");
 
   return (
     <div className="space-y-6">
@@ -58,7 +78,7 @@ export default function Filters() {
       {hasActiveFilters && (
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <Label className="text-sm font-medium">Active Filters</Label>
+            <Label className="text-sm font-medium">{t("active")}</Label>
             <Button
               variant="ghost"
               size="sm"
@@ -66,44 +86,47 @@ export default function Filters() {
               className="text-xs text-gray-500 hover:text-gray-700"
             >
               <RotateCcw className="w-3 h-3 mr-1" />
-              Clear All
+              {t("clearAll")}
             </Button>
           </div>
+
           <div className="flex flex-wrap gap-2">
-            {category && (
+            {category && category !== "all" && (
               <Badge variant="secondary" className="flex items-center gap-1">
-                {categories.find((c) => c.value === category)?.label}
+                {t("badge.category", {
+                  label:
+                    categories.find((c) => c.value === category)?.label ?? "",
+                })}
                 <X
                   className="w-3 h-3 cursor-pointer hover:text-red-500"
                   onClick={() => setCategory("")}
                 />
               </Badge>
             )}
+
             {min && (
               <Badge variant="secondary" className="flex items-center gap-1">
-                Min: ${min}
+                {t("badge.min", { value: min })}
                 <X
                   className="w-3 h-3 cursor-pointer hover:text-red-500"
                   onClick={() => setMin("")}
                 />
               </Badge>
             )}
+
             {max && (
               <Badge variant="secondary" className="flex items-center gap-1">
-                Max: ${max}
+                {t("badge.max", { value: max })}
                 <X
                   className="w-3 h-3 cursor-pointer hover:text-red-500"
                   onClick={() => setMax("")}
                 />
               </Badge>
             )}
-            {sort && (
+
+            {sort && sort !== "all" && (
               <Badge variant="secondary" className="flex items-center gap-1">
-                {sort === "price_asc"
-                  ? "Price: Low to High"
-                  : sort === "price_desc"
-                  ? "Price: High to Low"
-                  : sort}
+                {t("badge.sort", { label: sortLabel })}
                 <X
                   className="w-3 h-3 cursor-pointer hover:text-red-500"
                   onClick={() => setSort("")}
@@ -111,22 +134,23 @@ export default function Filters() {
               </Badge>
             )}
           </div>
+
           <Separator />
         </div>
       )}
 
       {/* Price Range */}
       <div className="space-y-3">
-        <Label className="text-sm font-medium">Price Range</Label>
+        <Label className="text-sm font-medium">{t("priceRange")}</Label>
         <div className="grid grid-cols-2 gap-3">
           <div>
             <Label htmlFor="min-price" className="text-xs text-gray-500">
-              Min Price
+              {t("minLabel")}
             </Label>
             <Input
               id="min-price"
               type="number"
-              placeholder="$0"
+              placeholder={t("minPlaceholder")}
               value={min}
               onChange={(e) => setMin(e.target.value)}
               className="mt-1"
@@ -134,12 +158,12 @@ export default function Filters() {
           </div>
           <div>
             <Label htmlFor="max-price" className="text-xs text-gray-500">
-              Max Price
+              {t("maxLabel")}
             </Label>
             <Input
               id="max-price"
               type="number"
-              placeholder="$1000"
+              placeholder={t("maxPlaceholder")}
               value={max}
               onChange={(e) => setMax(e.target.value)}
               className="mt-1"
@@ -152,13 +176,13 @@ export default function Filters() {
 
       {/* Category */}
       <div className="space-y-3">
-        <Label className="text-sm font-medium">Category</Label>
+        <Label className="text-sm font-medium">{t("category")}</Label>
         <Select value={category} onValueChange={setCategory}>
           <SelectTrigger>
-            <SelectValue placeholder="All Categories" />
+            <SelectValue placeholder={t("allCategories")} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All Categories</SelectItem>
+            <SelectItem value="all">{t("allCategories")}</SelectItem>
             {categories.map((cat) => (
               <SelectItem key={cat.value} value={cat.value}>
                 {cat.label}
@@ -172,17 +196,17 @@ export default function Filters() {
 
       {/* Sort */}
       <div className="space-y-3">
-        <Label className="text-sm font-medium">Sort By</Label>
+        <Label className="text-sm font-medium">{t("sortBy")}</Label>
         <Select value={sort} onValueChange={setSort}>
           <SelectTrigger>
-            <SelectValue placeholder="Default" />
+            <SelectValue placeholder={t("sort.default")} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">Default</SelectItem>
-            <SelectItem value="price_asc">Price: Low to High</SelectItem>
-            <SelectItem value="price_desc">Price: High to Low</SelectItem>
-            <SelectItem value="name_asc">Name: A to Z</SelectItem>
-            <SelectItem value="name_desc">Name: Z to A</SelectItem>
+            <SelectItem value="all">{t("sort.default")}</SelectItem>
+            <SelectItem value="price_asc">{t("sort.priceAsc")}</SelectItem>
+            <SelectItem value="price_desc">{t("sort.priceDesc")}</SelectItem>
+            <SelectItem value="name_asc">{t("sort.nameAsc")}</SelectItem>
+            <SelectItem value="name_desc">{t("sort.nameDesc")}</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -192,12 +216,12 @@ export default function Filters() {
         onClick={applyFilters}
         className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3"
       >
-        Apply Filters
+        {t("apply")}
       </Button>
 
       {/* Quick Filters */}
       <div className="space-y-3">
-        <Label className="text-sm font-medium">Quick Filters</Label>
+        <Label className="text-sm font-medium">{t("quickFilters")}</Label>
         <div className="grid grid-cols-2 gap-2">
           <Button
             variant="outline"
@@ -209,7 +233,7 @@ export default function Filters() {
             }}
             className="text-xs"
           >
-            Under $50
+            {t("under50")}
           </Button>
           <Button
             variant="outline"
@@ -221,7 +245,7 @@ export default function Filters() {
             }}
             className="text-xs"
           >
-            $50 - $100
+            {t("fiftyToHundred")}
           </Button>
           <Button
             variant="outline"
@@ -233,7 +257,7 @@ export default function Filters() {
             }}
             className="text-xs"
           >
-            Over $100
+            {t("over100")}
           </Button>
           <Button
             variant="outline"
@@ -244,7 +268,7 @@ export default function Filters() {
             }}
             className="text-xs"
           >
-            Best Value
+            {t("bestValue")}
           </Button>
         </div>
       </div>

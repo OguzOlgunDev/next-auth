@@ -5,15 +5,19 @@ import { Button } from "@/components/ui/button";
 import { Heart, Share } from "lucide-react";
 import AddToCartButton from "@/components/product/AddToCartButton";
 import type { Product } from "@/types/product";
+import { useTranslations } from "next-intl";
 
 export default function AddToCartSection({ product }: { product: Product }) {
   const [qty, setQty] = useState(1);
+  const t = useTranslations("components.addtocartsection");
 
   return (
     <div className="space-y-4">
       <div className="flex items-center space-x-4">
         <div>
-          <label className="block text-sm font-medium mb-2">Quantity</label>
+          <label className="block text-sm font-medium mb-2">
+            {t("quantity")}
+          </label>
           <select
             value={qty}
             onChange={(e) => setQty(Number(e.target.value))}
@@ -33,9 +37,9 @@ export default function AddToCartSection({ product }: { product: Product }) {
       <div className="flex space-x-3">
         <Button variant="outline" className="flex-1">
           <Heart className="w-4 h-4 mr-2" />
-          Add to Wishlist
+          {t("wishlist")}
         </Button>
-        <Button variant="outline" size="icon" aria-label="Share">
+        <Button variant="outline" size="icon" aria-label={t("share")}>
           <Share className="w-4 h-4" />
         </Button>
       </div>

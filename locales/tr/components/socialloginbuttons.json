@@ -1,0 +1,5 @@
+{
+  "auth0": "Auth0 ile Giriş Yap",
+  "google": "Google ile Giriş Yap",
+  "github": "GitHub ile Giriş Yap"
+}

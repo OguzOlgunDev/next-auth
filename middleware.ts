@@ -1,40 +1,51 @@
+// middleware.ts
+import createMiddleware from "next-intl/middleware";
+import i18n from "./next-intl.config";
 import { NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 import type { NextRequest } from "next/server";
 
+// 🌍 i18n middleware
+const intlMiddleware = createMiddleware(i18n);
+
 export async function middleware(req: NextRequest) {
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
-  const { pathname } = req.nextUrl;
+  const { pathname, locale } = req.nextUrl;
 
   const protectedPaths = ["/dashboard", "/profile", "/admin"];
-  const isProtected = protectedPaths.some((path) =>
-    req.nextUrl.pathname.startsWith(path)
-  );
+  const isProtected = protectedPaths.some((path) => pathname.startsWith(path));
 
-  // kullanıcı zaten giriş yapmışsa login sayfasına gitmeye calisinca ana sayfaya yönlendir
+  // 🔑 Eğer login sayfasına girmişse ve zaten token varsa → locale koruyarak anasayfaya
   if (pathname === "/login" && token) {
     const url = req.nextUrl.clone();
-    url.pathname = "/";
+    url.pathname = `/${locale}`;
     return NextResponse.redirect(url);
   }
 
+  // 🔑 Eğer protected path'e girmiş ama token yoksa → locale koruyarak login'e
   if (isProtected && !token) {
     const url = req.nextUrl.clone();
-    url.pathname = "/login";
+    url.pathname = `/${locale}/login`;
     return NextResponse.redirect(url);
   }
 
+  // 🔑 Eğer admin path'inde ama role admin değilse → locale koruyarak anasayfaya
   if (pathname.startsWith("/admin")) {
-    const role = (token as any).role;
+    const role = (token as any)?.role;
     if (role !== "admin") {
-      const forbiddenUrl = new URL("/", req.url);
-      return NextResponse.redirect(forbiddenUrl);
+      const url = req.nextUrl.clone();
+      url.pathname = `/${locale}`;
+      return NextResponse.redirect(url);
     }
   }
 
-  return NextResponse.next();
+  // 🌍 En son i18n middleware çalışsın
+  return intlMiddleware(req);
 }
 
+// ✅ tüm path'leri locale-aware yap
 export const config = {
-  matcher: ["/dashboard/:path*", "/profile/:path*", "/admin/:path*", "/login"],
+  matcher: [
+    "/((?!api|_next|.*\\..*).*)", // bütün route'ları yakala
+  ],
 };

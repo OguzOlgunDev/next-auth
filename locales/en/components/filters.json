@@ -1,0 +1,37 @@
+{
+  "active": "Active Filters",
+  "clearAll": "Clear All",
+  "badge": {
+    "category": "{label}",
+    "min": "Min: ${value}",
+    "max": "Max: ${value}",
+    "sort": "{label}"
+  },
+  "priceRange": "Price Range",
+  "minLabel": "Min Price",
+  "maxLabel": "Max Price",
+  "minPlaceholder": "$0",
+  "maxPlaceholder": "$1000",
+  "category": "Category",
+  "allCategories": "All Categories",
+  "sortBy": "Sort By",
+  "sort": {
+    "default": "Default",
+    "priceAsc": "Price: Low to High",
+    "priceDesc": "Price: High to Low",
+    "nameAsc": "Name: A to Z",
+    "nameDesc": "Name: Z to A"
+  },
+  "apply": "Apply Filters",
+  "quickFilters": "Quick Filters",
+  "under50": "Under $50",
+  "fiftyToHundred": "$50 - $100",
+  "over100": "Over $100",
+  "bestValue": "Best Value",
+  "categories": {
+    "men": "Men's Clothing",
+    "women": "Women's Clothing",
+    "jewelery": "Jewelry",
+    "electronics": "Electronics"
+  }
+}

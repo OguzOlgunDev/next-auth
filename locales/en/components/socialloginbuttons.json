@@ -1,0 +1,5 @@
+{
+  "auth0": "Login with Auth0",
+  "google": "Login with Google",
+  "github": "Login with GitHub"
+}
