@@ -1,1 +1,7 @@
-{}
+{
+  "title": "Sepetiniz Boş",
+  "description": "Henüz sepetinize ürün eklemediniz. Alışverişe başlayarak doldurun!",
+  "startShopping": "Alışverişe Başla",
+  "secureCheckout": "Güvenli ödeme",
+  "freeShipping": "50$ üzeri ücretsiz kargo"
+}

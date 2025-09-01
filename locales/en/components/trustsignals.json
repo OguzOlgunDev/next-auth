@@ -1,1 +1,8 @@
-{}
+{
+  "items": [
+    { "title": "Secure Payment", "desc": "SSL encrypted" },
+    { "title": "Fast Shipping", "desc": "2-3 business days" },
+    { "title": "Easy Returns", "desc": "30-day policy" },
+    { "title": "Top Rated", "desc": "4.8/5 stars" }
+  ]
+}

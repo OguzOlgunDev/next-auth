@@ -1,1 +1,7 @@
-{}
+{
+  "title": "Customer Reviews",
+  "basedOn": "Based on {count} reviews",
+  "write": "Write a Review",
+  "sampleReview": "Excellent product quality and fast delivery. Exactly as described and works perfectly.",
+  "verified": "Verified Purchase • {timeAgo}"
+}

@@ -1,1 +1,7 @@
-{}
+{
+  "title": "Müşteri Yorumları",
+  "basedOn": "{count} yoruma göre",
+  "write": "Yorum Yaz",
+  "sampleReview": "Ürün kalitesi mükemmel ve teslimat çok hızlı. Açıklamalardaki gibi geldi ve sorunsuz çalışıyor.",
+  "verified": "Doğrulanmış Satın Alma • {timeAgo}"
+}

@@ -1,0 +1,10 @@
+{
+  "failedTitle": "Ürünler Yüklenemedi",
+  "failedDescription": "Lütfen daha sonra tekrar deneyin.",
+  "filters": "Filtreler",
+  "productsFound": "{count} ürün bulundu",
+  "noProductsTitle": "Ürün bulunamadı",
+  "noProductsDescription": "Arama terimlerinizi veya filtreleri değiştirerek tekrar deneyin.",
+  "clearFilters": "Tüm Filtreleri Temizle",
+  "searchPlaceholder": "Ürün ara..."
+}

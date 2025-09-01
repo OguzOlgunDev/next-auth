@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Product } from "@/types/product";
+import { getTranslations } from "next-intl/server";
 
 export default async function RelatedProducts({
   category,
@@ -8,7 +9,8 @@ export default async function RelatedProducts({
   category: string;
   currentId: number;
 }) {
-  // Aynı kategorideki ürünleri getir
+  const t = await getTranslations("components.relatedproducts");
+
   const res = await fetch(
     `${
       process.env.NEXT_PUBLIC_BASE_URL
@@ -19,24 +21,18 @@ export default async function RelatedProducts({
   if (!res.ok) {
     return (
       <div className="mt-16">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">
-          You Might Also Like
-        </h2>
-        <p className="text-gray-500">No related products found.</p>
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">{t("title")}</h2>
+        <p className="text-gray-500">{t("empty")}</p>
       </div>
     );
   }
 
   let products: Product[] = await res.json();
-
-  // Kendisiyle aynı id’yi çıkar
   products = products.filter((p) => p.id !== currentId);
 
   return (
     <div className="mt-16">
-      <h2 className="text-2xl font-bold text-gray-900 mb-6">
-        You Might Also Like
-      </h2>
+      <h2 className="text-2xl font-bold text-gray-900 mb-6">{t("title")}</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((p) => (
           <Link

@@ -1,1 +1,17 @@
-{}
+{
+  "orderSummary": "Sipariş Özeti",
+  "subtotal": "Ara Toplam",
+  "shipping": "Kargo",
+  "tax": "Vergi",
+  "total": "Toplam",
+  "item": "ürün",
+  "items": "ürün",
+  "free": "Ücretsiz",
+  "proceedCheckout": "Ödeme Yap",
+  "continueShopping": "Alışverişe Devam Et",
+  "toastProceeding": "Ödeme sayfasına yönlendiriliyorsunuz...",
+  "toastRedirecting": "Güvenli ödeme sayfasına yönlendiriliyor.",
+  "secureCheckout": "Güvenli SSL şifrelenmiş ödeme",
+  "freeShipping": "50$ üzeri ücretsiz kargo",
+  "paymentOptions": "Birden fazla ödeme seçeneği mevcut"
+}

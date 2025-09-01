@@ -1,1 +1,8 @@
-{}
+{
+  "total": "Total:",
+  "item": "item",
+  "items": "items",
+  "checkout": "Checkout",
+  "proceeding": "Proceeding to checkout...",
+  "redirecting": "Redirecting to secure payment."
+}

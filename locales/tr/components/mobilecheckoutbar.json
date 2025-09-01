@@ -1,1 +1,8 @@
-{}
+{
+  "total": "Toplam:",
+  "item": "ürün",
+  "items": "ürün",
+  "checkout": "Satın Al",
+  "proceeding": "Ödemeye yönlendiriliyorsunuz...",
+  "redirecting": "Güvenli ödeme sayfasına yönlendiriliyor."
+}

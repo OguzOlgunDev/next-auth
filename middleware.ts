@@ -12,7 +12,7 @@ export async function middleware(req: NextRequest) {
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
   const { pathname, locale } = req.nextUrl;
 
-  const protectedPaths = ["/dashboard", "/profile", "/admin"];
+  const protectedPaths = ["/fvorites", "/admin"];
   const isProtected = protectedPaths.some((path) => pathname.startsWith(path));
 
   // 🔑 Eğer login sayfasına girmişse ve zaten token varsa → locale koruyarak anasayfaya

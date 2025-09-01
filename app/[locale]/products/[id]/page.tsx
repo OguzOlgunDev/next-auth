@@ -11,8 +11,8 @@ import ProductSpecs from "@/components/product/ProductSpecs";
 import Reviews from "@/components/product/Reviews";
 import RelatedProducts from "@/components/product/RelatedProducts";
 import type { Product } from "@/types/product";
+import { getTranslations } from "next-intl/server"; // ✅
 
-// ✅ Metadata
 export async function generateMetadata({
   params,
 }: {
@@ -21,9 +21,7 @@ export async function generateMetadata({
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/products/${params.id}`,
-      {
-        next: { revalidate: 600 },
-      }
+      { next: { revalidate: 600 } }
     );
 
     if (!res.ok) {
@@ -60,7 +58,6 @@ export async function generateMetadata({
   }
 }
 
-// ✅ Page Component
 export default async function ProductPage({
   params,
 }: {
@@ -68,21 +65,19 @@ export default async function ProductPage({
 }) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/products/${params.id}`,
-    {
-      next: { revalidate: 600 },
-    }
+    { next: { revalidate: 600 } }
   );
+
+  const t = await getTranslations("pages.product"); // ✅ Server tarafı için doğru yöntem
 
   if (!res.ok) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 mb-2">
-            Product Not Found
+            {t("notFoundTitle")}
           </h1>
-          <p className="text-gray-600">
-            The product you're looking for doesn't exist.
-          </p>
+          <p className="text-gray-600">{t("notFoundDescription")}</p>
         </div>
       </div>
     );
@@ -98,10 +93,8 @@ export default async function ProductPage({
 
       <div className="max-w-7xl mx-auto px-4 pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Product Image Section */}
           <ProductGallery product={product} />
 
-          {/* Product Information Section */}
           <div className="space-y-6">
             <ProductHeader title={product.title} rating={4} reviews={127} />
             <ProductPrice price={product.price} discount={0.2} />
@@ -110,15 +103,12 @@ export default async function ProductPage({
 
             <div>
               <h3 className="text-lg font-semibold mb-3">
-                Product Description
+                {t("descriptionTitle")}
               </h3>
               <p className="text-gray-700 leading-relaxed mb-4">
                 {product.description}
               </p>
-              <p className="text-gray-600 text-sm">
-                This premium product combines quality craftsmanship with modern
-                design, offering exceptional value and performance.
-              </p>
+              <p className="text-gray-600 text-sm">{t("extraDescription")}</p>
             </div>
 
             <ProductFeatures />

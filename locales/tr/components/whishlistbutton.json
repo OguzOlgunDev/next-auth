@@ -1,1 +1,6 @@
-{}
+{
+  "added": "Favorilere eklendi ❤️",
+  "removed": "Favorilerden çıkarıldı ❌",
+  "ariaAdd": "Favorilere ekle",
+  "ariaRemove": "Favorilerden çıkar"
+}

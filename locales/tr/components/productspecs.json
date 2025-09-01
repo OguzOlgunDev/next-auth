@@ -1,1 +1,21 @@
-{}
+{
+  "title": "Ürün Özellikleri",
+  "labels": {
+    "category": "Kategori",
+    "brand": "Marka",
+    "sku": "Stok Kodu",
+    "availability": "Stok Durumu",
+    "material": "Materyal",
+    "warranty": "Garanti",
+    "weight": "Ağırlık",
+    "dimensions": "Boyutlar"
+  },
+  "values": {
+    "brand": "Premium Marka",
+    "availability": "Stokta Var",
+    "material": "Premium Kalite",
+    "warranty": "2 Yıl",
+    "weight": "1.2 kg",
+    "dimensions": "25×15×10 cm"
+  }
+}

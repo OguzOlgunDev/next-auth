@@ -1,1 +1,17 @@
-{}
+{
+  "orderSummary": "Order Summary",
+  "subtotal": "Subtotal",
+  "shipping": "Shipping",
+  "tax": "Tax",
+  "total": "Total",
+  "item": "item",
+  "items": "items",
+  "free": "Free",
+  "proceedCheckout": "Proceed to Checkout",
+  "continueShopping": "Continue Shopping",
+  "toastProceeding": "Proceeding to checkout...",
+  "toastRedirecting": "Redirecting to secure payment.",
+  "secureCheckout": "Secure SSL encrypted checkout",
+  "freeShipping": "Free shipping on orders over $50",
+  "paymentOptions": "Multiple payment options accepted"
+}
