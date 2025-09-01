@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 export default function WishlistButton({
   productId,
@@ -17,8 +18,8 @@ export default function WishlistButton({
   const { data: session } = useSession();
   const router = useRouter();
   const [isWishlisted, setIsWishlisted] = useState(false);
+  const t = useTranslations("components.whishlistbutton");
 
-  // İlk açılışta localStorage'dan oku
   useEffect(() => {
     if (typeof window !== "undefined") {
       const stored = localStorage.getItem("wishlist");
@@ -33,7 +34,6 @@ export default function WishlistButton({
     e.preventDefault();
     e.stopPropagation();
 
-    // login yoksa login sayfasına yönlendir
     if (!session) {
       router.push("/login");
       return;
@@ -45,18 +45,16 @@ export default function WishlistButton({
     let next: boolean;
 
     if (list.includes(productId)) {
-      // Favorilerden çıkar
       list = list.filter((id) => id !== productId);
       next = false;
-      toast("Favorilerden çıkarıldı ❌", {
+      toast(t("removed"), {
         description: productTitle,
         duration: 2000,
       });
     } else {
-      // Favorilere ekle
       list.push(productId);
       next = true;
-      toast.success("Favorilere eklendi ❤️", {
+      toast.success(t("added"), {
         description: productTitle,
         duration: 2000,
       });
@@ -74,7 +72,7 @@ export default function WishlistButton({
       className={`absolute top-3 right-3 bg-white/80 backdrop-blur-sm hover:bg-white shadow-sm transition-all duration-200 ${
         isWishlisted ? "text-red-500" : "text-gray-600"
       }`}
-      aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
+      aria-label={isWishlisted ? t("ariaRemove") : t("ariaAdd")}
     >
       <Heart className={`w-4 h-4 ${isWishlisted ? "fill-current" : ""}`} />
     </Button>

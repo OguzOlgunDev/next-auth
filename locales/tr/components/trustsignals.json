@@ -1,1 +1,8 @@
-{}
+{
+  "items": [
+    { "title": "Güvenli Ödeme", "desc": "SSL şifreleme" },
+    { "title": "Hızlı Kargo", "desc": "2-3 iş günü" },
+    { "title": "Kolay İade", "desc": "30 gün iade politikası" },
+    { "title": "En Çok Tercih Edilen", "desc": "4.8/5 yıldız" }
+  ]
+}

@@ -14,6 +14,9 @@ export default getRequestConfig(async ({ locale }) => {
     messages: {
       pages: {
         home: await load("pages/home"),
+        products: await load("pages/products"),
+        product: await load("pages/product"),
+        login: await load("pages/login"),
       },
       components: {
         productcard: await load("components/productcard"),
@@ -23,7 +26,7 @@ export default getRequestConfig(async ({ locale }) => {
         cartitemcard: await load("components/cartitemcard"),
         mobilecheckoutbar: await load("components/mobilecheckoutbar"),
         ordersummary: await load("components/ordersummary"),
-        quantitycontrol: await load("components/quantitycontrol"),
+
         recommendedlist: await load("components/recommendedlist"),
         shippingnotice: await load("components/shippingnotice"),
         navbar: await load("components/navbar"),
@@ -32,11 +35,9 @@ export default getRequestConfig(async ({ locale }) => {
         breadcrumb: await load("components/breadcrumb"),
         filters: await load("components/filters"),
         productfeatures: await load("components/productfeatures"),
-        productgallery: await load("components/productgallery"),
         productheader: await load("components/productheader"),
         productprice: await load("components/productprice"),
         productspecs: await load("components/productspecs"),
-        ratingstars: await load("components/ratingstars"),
         relatedproducts: await load("components/relatedproducts"),
         reviews: await load("components/reviews"),
         trustsignals: await load("components/trustsignals"),

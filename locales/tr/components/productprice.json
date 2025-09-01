@@ -1,1 +1,4 @@
-{}
+{
+  "discount": "{percent}% İNDİRİM",
+  "freeShipping": "✓ {amount}$ üzeri siparişlerde ücretsiz kargo"
+}

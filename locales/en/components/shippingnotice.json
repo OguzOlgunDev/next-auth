@@ -1,1 +1,4 @@
-{}
+{
+  "freeShippingQualified": "🎉 You qualify for free shipping!",
+  "addMore": "Add ${amount} more for free shipping"
+}

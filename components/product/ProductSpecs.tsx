@@ -1,27 +1,37 @@
+"use client";
+
 import type { Product } from "@/types/product";
+import { useTranslations } from "next-intl";
 
 export default function ProductSpecs({ product }: { product: Product }) {
+  const t = useTranslations("components.productspecs");
+
   return (
     <div className="mt-16">
-      <h2 className="text-2xl font-bold text-gray-900 mb-6">
-        Product Specifications
-      </h2>
+      <h2 className="text-2xl font-bold text-gray-900 mb-6">{t("title")}</h2>
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-2">
           <div className="p-6 space-y-4">
-            <Row label="Category" value={product.category ?? "—"} />
-            <Row label="Brand" value="Premium Brand" />
-            <Row label="SKU" value={`SKU-${product.id}`} />
+            <Row label={t("labels.category")} value={product.category ?? "—"} />
+            <Row label={t("labels.brand")} value={t("values.brand")} />
+            <Row label={t("labels.sku")} value={`SKU-${product.id}`} />
             <Row
-              label="Availability"
-              value={<span className="text-green-600">In Stock</span>}
+              label={t("labels.availability")}
+              value={
+                <span className="text-green-600">
+                  {t("values.availability")}
+                </span>
+              }
             />
           </div>
           <div className="p-6 bg-gray-50 space-y-4">
-            <Row label="Material" value="Premium Quality" />
-            <Row label="Warranty" value="2 Years" />
-            <Row label="Weight" value="1.2 kg" />
-            <Row label="Dimensions" value="25×15×10 cm" />
+            <Row label={t("labels.material")} value={t("values.material")} />
+            <Row label={t("labels.warranty")} value={t("values.warranty")} />
+            <Row label={t("labels.weight")} value={t("values.weight")} />
+            <Row
+              label={t("labels.dimensions")}
+              value={t("values.dimensions")}
+            />
           </div>
         </div>
       </div>

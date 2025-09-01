@@ -1,1 +1,21 @@
-{}
+{
+  "title": "Product Specifications",
+  "labels": {
+    "category": "Category",
+    "brand": "Brand",
+    "sku": "SKU",
+    "availability": "Availability",
+    "material": "Material",
+    "warranty": "Warranty",
+    "weight": "Weight",
+    "dimensions": "Dimensions"
+  },
+  "values": {
+    "brand": "Premium Brand",
+    "availability": "In Stock",
+    "material": "Premium Quality",
+    "warranty": "2 Years",
+    "weight": "1.2 kg",
+    "dimensions": "25×15×10 cm"
+  }
+}

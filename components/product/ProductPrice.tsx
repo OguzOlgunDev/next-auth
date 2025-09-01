@@ -1,4 +1,7 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
+import { useTranslations } from "next-intl";
 
 export default function ProductPrice({
   price,
@@ -7,7 +10,9 @@ export default function ProductPrice({
   price: number;
   discount?: number;
 }) {
+  const t = useTranslations("components.productprice");
   const oldPrice = (price * (1 + discount)).toFixed(2);
+
   return (
     <div className="space-y-2">
       <div className="flex items-baseline space-x-3">
@@ -15,12 +20,12 @@ export default function ProductPrice({
         <span className="text-lg text-gray-500 line-through">${oldPrice}</span>
         {discount > 0 && (
           <Badge variant="destructive" className="text-xs">
-            {Math.round(discount * 100)}% OFF
+            {t("discount", { percent: Math.round(discount * 100) })}
           </Badge>
         )}
       </div>
       <p className="text-sm text-green-600 font-medium">
-        ✓ Free shipping on orders over $50
+        {t("freeShipping", { amount: 50 })}
       </p>
     </div>
   );

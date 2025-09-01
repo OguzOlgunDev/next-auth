@@ -2,34 +2,19 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: false,
+  reactStrictMode: true,
   images: {
     remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "lh3.googleusercontent.com", // Google profile photos
-      },
-      {
-        protocol: "https",
-        hostname: "s.gravatar.com", // Gravatar
-      },
-      {
-        protocol: "https",
-        hostname: "*.auth0.com", // Auth0 hosted avatars
-      },
-      {
-        protocol: "https",
-        hostname: "avatars.githubusercontent.com", // GitHub profile photos
-      },
-      {
-        protocol: "https",
-        hostname: "github.com", // Eski GitHub avatar URL'leri
-      },
-      {
-        protocol: "https",
-        hostname: "fakestoreapi.com", // ✅ Fake Store ürün görselleri
-      },
+      { protocol: "https", hostname: "lh3.googleusercontent.com" },
+      { protocol: "https", hostname: "s.gravatar.com" },
+      { protocol: "https", hostname: "*.auth0.com" },
+      { protocol: "https", hostname: "avatars.githubusercontent.com" },
+      { protocol: "https", hostname: "github.com" },
+      { protocol: "https", hostname: "fakestoreapi.com" },
     ],
+    formats: ["image/avif", "image/webp"], // ✅ modern formatlar
+    deviceSizes: [320, 480, 640, 768, 1024], // ✅ responsive optimizasyon
+    imageSizes: [16, 32, 64, 128, 256, 384],
   },
 };
 

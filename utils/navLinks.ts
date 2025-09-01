@@ -1,16 +1,14 @@
-export interface NavLink {
-  label: string;
-  href: string;
-}
-
-export const navLinksPrivite: NavLink[] = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Profile", href: "/profile" },
-  { label: "Dashboard", href: "/dashboard" },
+export const navLinksPublic = [
+  { href: "/", key: "home" },
+  { href: "/products", key: "products" },
+  { href: "/about", key: "about" },
+  { href: "/contact", key: "contact" },
 ];
 
-export const navLinksPublic: NavLink[] = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
+export const navLinksPrivite = [
+  { href: "/", key: "home" },
+  { href: "/dashboard", key: "dashboard" },
+  { href: "/products", key: "products" },
+  { href: "/about", key: "about" },
+  { href: "/contact", key: "contact" },
 ];

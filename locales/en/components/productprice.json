@@ -1,1 +1,4 @@
-{}
+{
+  "discount": "{percent}% OFF",
+  "freeShipping": "✓ Free shipping on orders over ${amount}"
+}

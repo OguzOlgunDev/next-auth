@@ -1,1 +1,7 @@
-{}
+{
+  "title": "Your Cart is Empty",
+  "description": "Looks like you haven't added any items to your cart yet. Start shopping to fill it up!",
+  "startShopping": "Start Shopping",
+  "secureCheckout": "Secure checkout",
+  "freeShipping": "Free shipping over $50"
+}

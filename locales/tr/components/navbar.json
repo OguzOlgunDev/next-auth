@@ -1,1 +1,10 @@
-{}
+{
+  "home": "Ana Sayfa",
+  "dashboard": "Panel",
+  "products": "Ürünler",
+  "about": "Hakkımızda",
+  "contact": "İletişim",
+  "cart": "Sepet",
+  "login": "Giriş Yap",
+  "logout": "Çıkış Yap"
+}

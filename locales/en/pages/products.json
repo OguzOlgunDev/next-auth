@@ -1,0 +1,10 @@
+{
+  "failedTitle": "Failed to Load Products",
+  "failedDescription": "Please try again later.",
+  "filters": "Filters",
+  "productsFound": "{count} products found",
+  "noProductsTitle": "No products found",
+  "noProductsDescription": "Try adjusting your filters or search terms to find what you're looking for.",
+  "clearFilters": "Clear All Filters",
+  "searchPlaceholder": "Search for products..."
+}

@@ -8,6 +8,7 @@ import { QuantityControl } from "./QuantityControl";
 import { formatPrice } from "@/lib/cart/money";
 import { memo } from "react";
 import type { CartItem } from "@/types/cart";
+import { useTranslations } from "next-intl";
 
 type Props = {
   item: CartItem;
@@ -17,6 +18,8 @@ type Props = {
 };
 
 function CartItemCardBase({ item, onRemove, onInc, onDec }: Props) {
+  const t = useTranslations("components.cartitemcard");
+
   return (
     <Card className="overflow-hidden hover:shadow-md transition-shadow duration-200">
       <CardContent className="p-6">
@@ -46,7 +49,7 @@ function CartItemCardBase({ item, onRemove, onInc, onDec }: Props) {
                   </span>
                   <Badge variant="outline" className="text-xs">
                     <Tag className="w-3 h-3 mr-1" />
-                    Best Price
+                    {t("bestPrice")}
                   </Badge>
                 </div>
               </div>
@@ -64,7 +67,7 @@ function CartItemCardBase({ item, onRemove, onInc, onDec }: Props) {
             <div className="flex items-center justify-between mt-4">
               <div className="flex items-center space-x-3">
                 <span className="text-sm font-medium text-gray-700">
-                  Quantity:
+                  {t("quantity")}
                 </span>
                 <QuantityControl
                   qty={item.qty}
@@ -79,7 +82,7 @@ function CartItemCardBase({ item, onRemove, onInc, onDec }: Props) {
                 </p>
                 {item.qty > 1 && (
                   <p className="text-xs text-gray-500">
-                    {formatPrice(item.price)} each
+                    {formatPrice(item.price)} {t("each")}
                   </p>
                 )}
               </div>

@@ -2,14 +2,15 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ShoppingBag } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function RecommendedList() {
+  const t = useTranslations("components.recommendedlist");
+
   return (
     <Card className="mt-6">
       <CardContent className="p-6">
-        <h3 className="font-semibold text-gray-900 mb-4">
-          You might also like
-        </h3>
+        <h3 className="font-semibold text-gray-900 mb-4">{t("title")}</h3>
         <div className="space-y-3">
           {[1, 2].map((i) => (
             <div
@@ -21,12 +22,12 @@ export default function RecommendedList() {
               </div>
               <div className="flex-1">
                 <p className="text-sm font-medium text-gray-900">
-                  Recommended Item {i}
+                  {t("recommendedItem", { i })}
                 </p>
                 <p className="text-xs text-gray-500">$29.99</p>
               </div>
               <Button size="sm" variant="outline" className="text-xs">
-                Add
+                {t("add")}
               </Button>
             </div>
           ))}

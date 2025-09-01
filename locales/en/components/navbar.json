@@ -1,1 +1,10 @@
-{}
+{
+  "home": "Home",
+  "products": "Products",
+  "dashboard": "Dashboard",
+  "about": "About Us",
+  "contact": "Contact",
+  "cart": "Cart",
+  "login": "Login",
+  "logout": "Logout"
+}

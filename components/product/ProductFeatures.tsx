@@ -1,13 +1,14 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+
 export default function ProductFeatures() {
-  const features = [
-    "Premium quality materials",
-    "Durable construction",
-    "Modern design aesthetic",
-    "Easy to use and maintain",
-  ];
+  const t = useTranslations("components.productfeatures");
+  const features: string[] = t.raw("list"); // list array olarak alınıyor
+
   return (
     <div>
-      <h3 className="text-lg font-semibold mb-3">Key Features</h3>
+      <h3 className="text-lg font-semibold mb-3">{t("title")}</h3>
       <ul className="space-y-2">
         {features.map((f) => (
           <li key={f} className="flex items-center text-gray-700">

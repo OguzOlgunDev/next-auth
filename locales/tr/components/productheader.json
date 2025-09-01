@@ -1,1 +1,4 @@
-{}
+{
+  "reviews": "{count} yorum",
+  "ratingWithReviews": "({rating}) • {reviews}"
+}
