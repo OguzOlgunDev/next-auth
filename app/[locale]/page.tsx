@@ -18,6 +18,8 @@ export default async function Home({
   // "pages.home" namespace
   const t = await getTranslations({ locale, namespace: "pages.home" });
   const baseUrl = getBaseUrl();
+  console.log("Base URL:", baseUrl);
+
 
   const res = await fetch(`${baseUrl}/api/products?featured=true`, {
     next: { revalidate: 300 },
