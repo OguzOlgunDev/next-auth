@@ -13,9 +13,7 @@ type SearchParams = Record<string, string | string[]>;
 
 // ✅ Base URL helper
 function getBaseUrl() {
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-  if (process.env.NEXT_PUBLIC_BASE_URL) return process.env.NEXT_PUBLIC_BASE_URL;
-  return "http://localhost:3000"; // dev için
+  return process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 }
 
 function toSearchParams(searchParams?: SearchParams) {
