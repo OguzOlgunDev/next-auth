@@ -5,6 +5,7 @@ import Filters from "@/components/product/Filters";
 import { Search, Grid, List, SlidersHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Product } from "@/types/product";
 
 export const revalidate = 600; // ISR
 
@@ -111,7 +112,7 @@ export default async function ProductsPage({
 
             {products.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {products.map((product: any, idx: number) => (
+                {products.map((product: Product, idx: number) => (
                   <ProductCard
                     key={product.id}
                     product={{ ...product, isLCP: idx === 0 }}

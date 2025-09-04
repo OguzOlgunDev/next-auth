@@ -1,5 +1,6 @@
 import { ProductCard } from "@/components/product/ProductCard";
 import { getTranslations } from "next-intl/server";
+import { Product } from "@/types/product";
 
 export const revalidate = 300;
 
@@ -32,7 +33,7 @@ export default async function Home({
     <section className="max-w-6xl mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold mb-6">{t("topRated")}</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-        {featured.map((product: any) => (
+        {featured.map((product: Product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>

@@ -9,14 +9,16 @@ export default function LogoutButton() {
   const { data: session, status } = useSession();
   const t = useTranslations("components.logoutbutton");
 
-  if (status !== "authenticated") return null;
-
+  // 🔑 Hook her zaman çağrılır
   const nameOrEmail =
-    session.user?.name ?? session.user?.email ?? t("defaultUser");
+    session?.user?.name ?? session?.user?.email ?? t("defaultUser");
+
   const initials = useMemo(
     () => (nameOrEmail.charAt(0) || t("defaultUser").charAt(0)).toUpperCase(),
     [nameOrEmail, t]
   );
+
+  if (status !== "authenticated") return null;
 
   const handleLogout = async () => {
     await signOut({ redirect: false });
@@ -36,7 +38,7 @@ export default function LogoutButton() {
 
   return (
     <div className="flex items-center gap-3">
-      {session.user?.image ? (
+      {session?.user?.image ? (
         <Image
           src={session.user.image}
           alt={`${nameOrEmail} ${t("avatarAlt")}`}

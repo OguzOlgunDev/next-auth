@@ -17,6 +17,7 @@ export async function GET(req: Request, { params }: Params) {
     const product = await res.json();
     return NextResponse.json(product, { status: 200 });
   } catch (error) {
+    console.error("API error:", error);
     return NextResponse.json(
       { error: "Something went wrong" },
       { status: 500 }

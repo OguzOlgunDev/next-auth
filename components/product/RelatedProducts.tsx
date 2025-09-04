@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Product } from "@/types/product";
 import { getTranslations } from "next-intl/server";
+import Image from "next/image";
 
 export default async function RelatedProducts({
   category,
@@ -41,9 +42,11 @@ export default async function RelatedProducts({
             className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer group block"
           >
             <div className="aspect-square bg-gray-50 relative overflow-hidden">
-              <img
+              <Image
                 src={p.image}
                 alt={p.title}
+                width={400}
+                height={400}
                 className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
               />
             </div>

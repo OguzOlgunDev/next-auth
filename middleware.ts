@@ -1,51 +1,49 @@
-// middleware.ts
 import createMiddleware from "next-intl/middleware";
 import i18n from "./next-intl.config";
 import { NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 import type { NextRequest } from "next/server";
 
-// 🌍 i18n middleware
 const intlMiddleware = createMiddleware(i18n);
 
 export async function middleware(req: NextRequest) {
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
-  const { pathname, locale } = req.nextUrl;
+  const { pathname } = req.nextUrl;
 
-  const protectedPaths = ["/fvorites", "/admin"];
-  const isProtected = protectedPaths.some((path) => pathname.startsWith(path));
+  // 🌍 Extract locale from pathname (e.g., "/tr/favorites" -> "tr")
+  const segments = pathname.split("/");
+  const locale = segments[1] || "tr"; // Default to "tr" if no locale found
+  const normalizedPath =
+    segments.length > 2 ? `/${segments.slice(2).join("/")}` : "/";
 
-  // 🔑 Eğer login sayfasına girmişse ve zaten token varsa → locale koruyarak anasayfaya
-  if (pathname === "/login" && token) {
-    const url = req.nextUrl.clone();
-    url.pathname = `/${locale}`;
-    return NextResponse.redirect(url);
+  const protectedPaths = ["/favorites", "/admin"];
+  const isProtected = protectedPaths.some((path) =>
+    normalizedPath.startsWith(path)
+  );
+
+  // 🔑 If logged in, don't allow access to login page
+  if (normalizedPath === "/login" && token) {
+    return NextResponse.redirect(new URL(`/${locale}`, req.url));
   }
 
-  // 🔑 Eğer protected path'e girmiş ama token yoksa → locale koruyarak login'e
+  // 🔑 If not logged in and accessing protected path → redirect to login
   if (isProtected && !token) {
-    const url = req.nextUrl.clone();
-    url.pathname = `/${locale}/login`;
-    return NextResponse.redirect(url);
+    return NextResponse.redirect(new URL(`/${locale}/login`, req.url));
   }
 
-  // 🔑 Eğer admin path'inde ama role admin değilse → locale koruyarak anasayfaya
-  if (pathname.startsWith("/admin")) {
-    const role = (token as any)?.role;
-    if (role !== "admin") {
-      const url = req.nextUrl.clone();
-      url.pathname = `/${locale}`;
-      return NextResponse.redirect(url);
+  // 🔑 Admin control (only specific Gmail can access)
+  if (normalizedPath.startsWith("/admin")) {
+    const email = (token as any)?.email;
+    const allowedAdmin = "tiredcavalry@gmail.com"; // Replace with your email
+    if (email !== allowedAdmin) {
+      return NextResponse.redirect(new URL(`/${locale}`, req.url));
     }
   }
 
-  // 🌍 En son i18n middleware çalışsın
+  // 🌍 Run i18n middleware last
   return intlMiddleware(req);
 }
 
-// ✅ tüm path'leri locale-aware yap
 export const config = {
-  matcher: [
-    "/((?!api|_next|.*\\..*).*)", // bütün route'ları yakala
-  ],
+  matcher: ["/((?!api|_next|.*\\..*).*)"],
 };

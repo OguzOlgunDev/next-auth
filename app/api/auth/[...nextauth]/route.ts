@@ -23,7 +23,7 @@ const handler = NextAuth({
   secret: process.env.NEXTAUTH_SECRET,
 
   callbacks: {
-    async jwt({ token, user, account, profile }) {
+    async jwt({ token, user }) {
       // Kullanıcıya ilk login olduğunda role ata
       if (user) {
         // örnek: domain bazlı admin atama
