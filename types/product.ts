@@ -1,9 +1,13 @@
 export type Product = {
-  id: number; // ✅ sadece number
+  id: number;
   title: string;
   description: string;
   image: string;
   price: number;
   category?: string;
-  qty?: number;
+  qty?: number; // sadece kendi state/store için
+  rating?: {
+    rate: number;
+    count: number;
+  };
 };

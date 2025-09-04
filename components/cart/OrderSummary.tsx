@@ -2,7 +2,6 @@
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
 import { CreditCard, Shield, Truck } from "lucide-react";
 import { formatPrice } from "@/lib/cart/money";
 import { toast } from "sonner";

@@ -1,6 +1,5 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
 import RatingStars from "./RatingStars";
 import { useTranslations } from "next-intl";
 

@@ -40,7 +40,7 @@ export default function Reviews() {
                 <RatingStars value={5} outOf={5} size={4} />
               </div>
               <p className="text-gray-700 text-sm leading-relaxed">
-                "{t("sampleReview")}"
+                &quot;{t("sampleReview")}&quot;
               </p>
               <p className="text-xs text-gray-500 mt-2">
                 {t("verified", { timeAgo: "2 days ago" })}

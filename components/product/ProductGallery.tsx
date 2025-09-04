@@ -2,6 +2,7 @@
 
 import WishlistButton from "@/components/product/WhishlistButton";
 import type { Product } from "@/types/product";
+import Image from "next/image";
 
 export default function ProductGallery({ product }: { product: Product }) {
   const { id, image, title } = product;
@@ -9,9 +10,11 @@ export default function ProductGallery({ product }: { product: Product }) {
   return (
     <div className="space-y-4">
       <div className="aspect-square relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
-        <img
+        <Image
           src={image}
           alt={title}
+          width={600}
+          height={600}
           className="w-full h-full object-contain p-8 hover:scale-105 transition-transform duration-500"
         />
 
@@ -28,9 +31,11 @@ export default function ProductGallery({ product }: { product: Product }) {
               i === 0 ? "border-blue-500" : "border-gray-200"
             }`}
           >
-            <img
+            <Image
               src={image}
               alt={`${title} view ${i + 1}`}
+              width={150}
+              height={150}
               className="w-full h-full object-contain bg-white p-2"
             />
           </div>
