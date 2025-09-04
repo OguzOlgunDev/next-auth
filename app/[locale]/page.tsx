@@ -5,9 +5,7 @@ import { Product } from "@/types/product";
 export const revalidate = 300;
 
 function getBaseUrl() {
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-  if (process.env.NEXT_PUBLIC_BASE_URL) return process.env.NEXT_PUBLIC_BASE_URL;
-  return "http://localhost:3000";
+  return process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 }
 
 export default async function Home({
@@ -18,6 +16,7 @@ export default async function Home({
   // "pages.home" namespace
   const t = await getTranslations({ locale, namespace: "pages.home" });
   const baseUrl = getBaseUrl();
+  console.log("Base URL:", baseUrl);
 
   const res = await fetch(`${baseUrl}/api/products?featured=true`, {
     next: { revalidate: 300 },
